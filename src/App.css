@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+.todoDarkBg {
+  @apply bg-[url('../images/bg-mobile-dark.jpg')] md:bg-[url('../images/bg-desktop-dark.jpg')] bg-cover bg-center;
+}
+
+.todoLightBg {
+  @apply bg-[url('../images/bg-mobile-light.jpg')] md:bg-[url('../images/bg-desktop-light.jpg')] bg-cover bg-center;
+}
