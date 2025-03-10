@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./App.css";
 import moon from "../images/icon-moon.svg";
 import sun from "../images/icon-sun.svg";
@@ -13,7 +13,7 @@ import CompletedTodos from "./CompletedTodos";
 import ActiveTodos from "./ActiveTodos";
 
 function App() {
-  let { todos, addTodo, theme, toggleTheme, setTodos } =
+  let { todos, addTodo, theme, toggleTheme, setTodos, setTheme } =
     useContext(TodoContext);
   const [todo, setTodo] = useState("");
   const location = useLocation();
@@ -39,7 +39,7 @@ function App() {
       return;
     }
 
-    addTodo(newTodo);
+    addTodo(newTodo); // localStorage is also here
     setTodo("");
   };
 
@@ -47,11 +47,25 @@ function App() {
     setTodos(todos.filter((todo) => !todo.checked));
   };
 
+  useEffect(() => {
+    window.addEventListener("load", () => {
+      const todos = JSON.parse(localStorage.getItem("todos"));
+      const theme = localStorage.getItem("theme");
+
+      setTodos(todos);
+      setTheme(theme);
+    });
+  }, [setTodos, setTheme]);
+
+  // useEffect(() => {
+  //   localStorage.setItem("todos", todos);
+  // }, [todos]);
+
   return (
     <>
       <main
         className={`${
-          theme == "dark" ? "bg-black" : "bg-gray-200"
+          isDark ? "bg-black" : "bg-gray-200"
         }  min-h-screen text-white relative overflow-y-auto `}
       >
         <div
@@ -67,13 +81,15 @@ function App() {
 
               <button
                 className="group"
-                onClick={toggleTheme}
+                onClick={() => {
+                  toggleTheme(); // handles localStorage
+                }}
                 aria-label="Toggle theme"
               >
                 <img
                   className="flex group-hover:cursor-pointer"
-                  src={theme === "dark" ? sun : moon}
-                  alt={theme === "dark" ? "sun icon" : "moon icon"}
+                  src={isDark ? sun : moon}
+                  alt={isDark ? "sun icon" : "moon icon"}
                 />
               </button>
             </div>
@@ -82,17 +98,17 @@ function App() {
               <form
                 onSubmit={handleSubmitTodo}
                 className={`w-full flex space-x-3 p-4  rounded-md ${
-                  theme == "dark" ? "bg-gray-800" : "bg-white"
+                  isDark ? "bg-gray-800" : "bg-white"
                 }`}
               >
                 <div
                   className={`h-6 w-6 flex justify-center items-center rounded-full border ${
-                    theme == "dark" ? "border" : "border-gray-600"
+                    isDark ? "border" : "border-gray-600"
                   }`}
                 ></div>
                 <input
                   className={` outline-0 ${
-                    theme == "dark"
+                    isDark
                       ? "placeholder:text-white text-white"
                       : "placeholder:text-black text-black"
                   }`}
@@ -125,7 +141,7 @@ function App() {
               <div
                 className={`text-gray-600 px-4 py-4
                 flex justify-between rounded-b-md shadow-2xl
-                ${theme == "dark" ? `bg-gray-800` : `bg-white`}
+                ${isDark ? `bg-gray-800` : `bg-white`}
                 ${todos.length ? `flex` : `hidden`}
 
                  ${
@@ -185,9 +201,7 @@ function App() {
 
               <div
                 className={`flex md:hidden justify-center gap-2 rounded-md mt-12 px-4 py-4 ${
-                  theme == "dark"
-                    ? "bg-gray-800 text-white"
-                    : "bg-white text-black"
+                  isDark ? "bg-gray-800 text-white" : "bg-white text-black"
                 }`}
               >
                 <Link

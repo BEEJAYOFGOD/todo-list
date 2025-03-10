@@ -1,7 +1,7 @@
 import check from "../images/icon-check.svg";
 import deleteIcon from "../images/icon-cross.svg";
 
-const Todo = ({ todo, toggleTodo, deleteTodo, theme }) => {
+const Todo = ({ todo, toggleTodo, deleteTodo, theme, todos }) => {
   return (
     <>
       {" "}
@@ -19,6 +19,7 @@ const Todo = ({ todo, toggleTodo, deleteTodo, theme }) => {
             } ${theme == "dark" ? "border-gray-600" : "border-gray-900"}`}
             onClick={() => {
               toggleTodo(todo.id);
+              localStorage.setItem("todos", JSON.stringify(todos));
             }}
           >
             <img
