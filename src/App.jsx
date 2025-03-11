@@ -49,8 +49,8 @@ function App() {
 
   useEffect(() => {
     window.addEventListener("load", () => {
-      const todos = JSON.parse(localStorage.getItem("todos"));
-      const theme = localStorage.getItem("theme");
+      const todos = JSON.parse(localStorage.getItem("todos")) || [];
+      const theme = localStorage.getItem("theme") | "dark";
 
       setTodos(todos);
       setTheme(theme);
