@@ -60,7 +60,7 @@ function App() {
     console.log(todos);
     setTheme(theme);
     console.log(theme);
-  }, []);
+  }, [setTheme, setTodos]);
 
   // useEffect(() => {
   //   localStorage.setItem("todos", todos);
