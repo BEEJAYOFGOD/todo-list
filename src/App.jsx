@@ -48,14 +48,19 @@ function App() {
   };
 
   useEffect(() => {
-    window.addEventListener("load", () => {
-      const todos = JSON.parse(localStorage.getItem("todos")) || [];
-      const theme = localStorage.getItem("theme") || "dark";
+    // Get todos from localStorage
+    const storedTodos = localStorage.getItem("todos");
+    const todos = storedTodos ? JSON.parse(storedTodos) : [];
 
-      setTodos(todos);
-      setTheme(theme);
-    });
-  }, [setTodos, setTheme]);
+    // Get theme from localStorage
+    const theme = localStorage.getItem("theme") || "light";
+
+    // Update state with the fetched values
+    setTodos(todos);
+    console.log(todos);
+    setTheme(theme);
+    console.log(theme);
+  }, []);
 
   // useEffect(() => {
   //   localStorage.setItem("todos", todos);
