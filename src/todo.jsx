@@ -28,7 +28,7 @@ const Todo = ({ todo, toggleTodo, deleteTodo, theme }) => {
             />
           </div>
           <p
-            className={`text-justify w-fit border
+            className={`text-justify w-fit 
             ${todo.checked ? "line-through" : "bold"}
             ${theme === "dark" ? "text-white" : "text-black"}
           `}
