@@ -69,7 +69,7 @@ function App() {
   return (
     <>
       <main
-        className={`${
+        className={`transition-all duration-[0.8s] ${
           isDark ? "bg-black" : "bg-gray-200"
         }  min-h-screen text-white relative overflow-y-auto `}
       >
@@ -102,7 +102,7 @@ function App() {
             <div className="mt-12">
               <form
                 onSubmit={handleSubmitTodo}
-                className={`w-full flex space-x-3 p-4  rounded-md ${
+                className={`w-full flex space-x-3 p-4  rounded-md transition-all duration-[0.2s] ${
                   isDark ? "bg-gray-800" : "bg-white"
                 }`}
               >
@@ -130,7 +130,7 @@ function App() {
               <p>{theme}</p>
 
               <div
-                className={`${
+                className={`transition-all duration-[0.1s] ease-in ${
                   theme == "dark"
                     ? `bg-gray-800 mt-4 rounded-t-md`
                     : `bg-white mt-4 rounded-t-md`
