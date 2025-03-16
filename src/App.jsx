@@ -51,15 +51,36 @@ function App() {
     // Get todos from localStorage
     const storedTodos = localStorage.getItem("todos");
     const todos = storedTodos ? JSON.parse(storedTodos) : [];
-
-    // Get theme from localStorage
-    const theme = localStorage.getItem("theme") || "light";
-
-    // Update state with the fetched values
+    
     setTodos(todos);
-    console.log(todos);
-    setTheme(theme);
-    console.log(theme);
+
+    // Get theme from localStorage or system preference
+    const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const applyTheme = () => {
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) && darkModeQuery.matches)
+      ) {
+        setTheme("dark");
+      } else if (localStorage.theme) {
+        setTheme(localStorage.theme);
+      } else {
+        setTheme("light");
+      }
+    };
+
+    applyTheme(); // Apply theme on load
+
+    // Listen for system preference changes
+    const handleChange = (event) => {
+      setTheme(event.matches ? "dark" : "light");
+    };
+
+    darkModeQuery.addEventListener("change", handleChange);
+
+    // Cleanup listener
+    return () => darkModeQuery.removeEventListener("change", handleChange);
   }, [setTheme, setTodos]);
 
   // useEffect(() => {
