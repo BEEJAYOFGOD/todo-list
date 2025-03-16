@@ -51,7 +51,7 @@ function App() {
     // Get todos from localStorage
     const storedTodos = localStorage.getItem("todos");
     const todos = storedTodos ? JSON.parse(storedTodos) : [];
-    
+
     setTodos(todos);
 
     // Get theme from localStorage or system preference
@@ -91,7 +91,7 @@ function App() {
     <>
       <main
         className={`transition-all duration-[0.3s] ease-in-out ${
-          isDark ? "bg-black" : "bg-gray-200"
+          isDark ? "bg-very-dark-blue" : "bg-gray-200"
         }  min-h-screen text-white relative overflow-y-auto `}
       >
         <div
@@ -124,19 +124,17 @@ function App() {
               <form
                 onSubmit={handleSubmitTodo}
                 className={`w-full flex space-x-3 p-4  rounded-md transition-all duration-[0.2s] ${
-                  isDark ? "bg-gray-800" : "bg-white"
+                  isDark ? "bg-very-dark-desaturated-blue" : "bg-white"
                 }`}
               >
                 <div
-                  className={`h-6 w-6 flex justify-center items-center rounded-full border ${
-                    isDark ? "border" : "border-gray-600"
-                  }`}
+                  className={`h-6 w-6 flex justify-center items-center rounded-full border ${"border border-dark-grayish-blue"}`}
                 ></div>
                 <input
                   className={` outline-0 ${
                     isDark
-                      ? "placeholder:text-white text-white"
-                      : "placeholder:text-black text-black"
+                      ? "placeholder:text-dark-grayish-blue text-white"
+                      : "placeholder:text-dark-grayish-blue text-black"
                   }`}
                   placeholder="Create a new todo"
                   type="text"
@@ -151,7 +149,7 @@ function App() {
               <div
                 className={`transition-all duration-[0.1s] ease-in ${
                   theme == "dark"
-                    ? `bg-gray-800 mt-4 rounded-t-md`
+                    ? `bg-very-dark-desaturated-blue mt-4 rounded-t-md`
                     : `bg-white mt-4 rounded-t-md`
                 } shadow-2xl`}
               >
@@ -165,7 +163,7 @@ function App() {
               <div
                 className={`text-gray-600 px-4 py-4
                 flex justify-between rounded-b-md shadow-2xl
-                ${isDark ? `bg-gray-800` : `bg-white`}
+                ${isDark ? `bg-very-dark-desaturated-blue` : `bg-white`}
                 ${todos.length ? `flex` : `hidden`}
 
                  ${
