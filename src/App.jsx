@@ -87,7 +87,6 @@ function App() {
 
   const audio = document.getElementById("audio_tag");
 
-
   // useEffect(() => {
   //   localStorage.setItem("todos", todos);
   // }, [todos]);
@@ -113,9 +112,9 @@ function App() {
               <button
                 className="group"
                 onClick={() => {
+                  audio.play();
                   toggleTheme();
-                  audio.play()
-                
+
                   // handles localStorage
                 }}
                 aria-label="Toggle theme"
