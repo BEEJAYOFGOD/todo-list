@@ -69,7 +69,7 @@ function App() {
   return (
     <>
       <main
-        className={`transition-all duration-[0.8s] ${
+        className={`transition-all duration-[0.5s] ease-in-out ${
           isDark ? "bg-black" : "bg-gray-200"
         }  min-h-screen text-white relative overflow-y-auto `}
       >
