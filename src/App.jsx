@@ -11,6 +11,7 @@ import { TodoContext } from "./context";
 import AllTodos from "./allTodos";
 import CompletedTodos from "./CompletedTodos";
 import ActiveTodos from "./ActiveTodos";
+import clickSound from "./assets/click-button-166324.mp3";
 
 function App() {
   let { todos, addTodo, theme, toggleTheme, setTodos, setTheme } =
@@ -18,6 +19,7 @@ function App() {
   const [todo, setTodo] = useState("");
   const location = useLocation();
   const isDark = theme === "dark";
+  const [play, setPlay] = useState(false);
 
   // const Todo = {content:
 
@@ -83,6 +85,9 @@ function App() {
     return () => darkModeQuery.removeEventListener("change", handleChange);
   }, [setTheme, setTodos]);
 
+  const audio = document.getElementById("audio_tag");
+
+
   // useEffect(() => {
   //   localStorage.setItem("todos", todos);
   // }, [todos]);
@@ -108,7 +113,10 @@ function App() {
               <button
                 className="group"
                 onClick={() => {
-                  toggleTheme(); // handles localStorage
+                  toggleTheme();
+                  audio.play()
+                
+                  // handles localStorage
                 }}
                 aria-label="Toggle theme"
               >
@@ -118,6 +126,7 @@ function App() {
                   alt={isDark ? "sun icon" : "moon icon"}
                 />
               </button>
+              <audio id="audio_tag" src={clickSound} />
             </div>
 
             <div className="mt-12">
