@@ -127,8 +127,6 @@ function App() {
                 />
               </form>
 
-              <p>{theme}</p>
-
               <div
                 className={`transition-all duration-[0.1s] ease-in ${
                   theme == "dark"
