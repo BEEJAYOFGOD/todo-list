@@ -1,7 +1,11 @@
 import check from "../images/icon-check.svg";
 import deleteIcon from "../images/icon-cross.svg";
+import { TodoContext } from "./context";
+import { useContext } from "react";
 
-const Todo = ({ todo, toggleTodo, deleteTodo, theme }) => {
+const Todo = ({ todo }) => {
+  const { toggleTodo, theme, deleteTodo } = useContext(TodoContext);
+
   return (
     <>
       <div
@@ -22,7 +26,9 @@ const Todo = ({ todo, toggleTodo, deleteTodo, theme }) => {
               todo.checked
                 ? "bg-blue-500 bg-gradient-to-br from-blue-500 via-blue-500 to-purple-500"
                 : "border"
-            } ${theme == "dark" ? "border-gray-600" : "border-light-grayish-blue"}`}
+            } ${
+              theme == "dark" ? "border-gray-600" : "border-light-grayish-blue"
+            }`}
           >
             <img
               src={check}

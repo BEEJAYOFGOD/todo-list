@@ -19,7 +19,6 @@ function App() {
   const [todo, setTodo] = useState("");
   const location = useLocation();
   const isDark = theme === "dark";
-  const [play, setPlay] = useState(false);
 
   // const Todo = {content:
 
