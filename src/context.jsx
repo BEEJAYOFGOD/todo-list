@@ -7,10 +7,14 @@ export const TodoProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
   const [theme, setTheme] = useState("light");
 
+  const updateTodoStorage = (newTodos) => {
+    localStorage.setItem("todos", JSON.stringify(newTodos));
+  };
+
   const addTodo = (newTodo) => {
     setTodos((prev) => {
       let newTodos = [...prev, newTodo];
-      localStorage.setItem("todos", JSON.stringify(newTodos));
+      updateTodoStorage(newTodos);
 
       return newTodos;
     });
@@ -26,7 +30,7 @@ export const TodoProvider = ({ children }) => {
         todo.id === id ? { ...todo, checked: !todo.checked } : todo
       );
 
-      localStorage.setItem("todos", JSON.stringify(newTodos));
+      updateTodoStorage(newTodos);
 
       return newTodos;
     });
@@ -50,10 +54,11 @@ export const TodoProvider = ({ children }) => {
     <TodoContext.Provider
       value={{
         todos,
+        theme,
         addTodo,
         deleteTodo,
         toggleTodo,
-        theme,
+        updateTodoStorage,
         setTheme,
         toggleTheme,
         setTodos,
