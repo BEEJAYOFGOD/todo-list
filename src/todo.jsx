@@ -21,23 +21,25 @@ const Todo = ({ todo }) => {
     const draggedId = e.dataTransfer.getData("todoId");
     const droppedId = todo.id;
 
-    console.log("This is the dragged id", draggedId);
-    console.log("This is the dropped id", droppedId);
+    // Verify we have both IDs
+    if (!draggedId || draggedId === droppedId) {
+      return; // Exit early if same item or missing data
+    }
 
-    let draggedIndex = todos.findIndex((item) => item.id === draggedId);
-    let droppedIndex = todos.findIndex((item) => item.id === droppedId);
+    const draggedIndex = todos.findIndex((item) => item.id === draggedId);
+    const droppedIndex = todos.findIndex((item) => item.id === droppedId);
 
-    console.log(draggedIndex, droppedIndex);
+    // Verify both items exist
+    if (draggedIndex === -1 || droppedIndex === -1) {
+      console.error("Could not find one or both items");
+      return;
+    }
 
     setTodos((prevTodos) => {
-      let newTodos = [...prevTodos];
-
+      const newTodos = [...prevTodos];
       const [movedItem] = newTodos.splice(draggedIndex, 1);
-      console.log("movedItem", movedItem);
-
       newTodos.splice(droppedIndex, 0, movedItem);
       updateTodoStorage(newTodos);
-
       return newTodos;
     });
   };
