@@ -154,7 +154,7 @@ function App() {
               </form>
 
               <div
-                className={`transition-all duration-[0.1s] ease-in shadow-lg ${
+                className={`transition-all duration-[0.1s] ease-in shadow-[0_8px_8px_rgba(0,0,0,0.2)] ${
                   theme == "dark"
                     ? `bg-very-dark-desaturated-blue mt-4 rounded-t-md`
                     : `bg-white mt-4 rounded-t-md`
@@ -169,9 +169,13 @@ function App() {
 
               <div
                 className={`text-gray-600 px-4 py-4
-                flex justify-between rounded-b-md shadow-lg
-                ${isDark ? `bg-very-dark-desaturated-blue` : `bg-white`}
-                ${todos.length ? `flex` : `hidden`}
+                flex justify-between rounded-b-md
+              ${
+                isDark
+                  ? `bg-very-dark-desaturated-blue shadow-[0_8px_8px_rgba(0,0,0,0.2)]`
+                  : `bg-white shadow-lg`
+              }
+                  ${todos.length ? `flex` : `hidden`}
 
                  ${
                    (!todos.filter((todo) => !todo.checked).length &&
