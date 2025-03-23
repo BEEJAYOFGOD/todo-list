@@ -2,67 +2,40 @@ import check from "../images/icon-check.svg";
 import deleteIcon from "../images/icon-cross.svg";
 import { TodoContext } from "./context";
 import { useContext } from "react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 const Todo = ({ todo }) => {
-  const { toggleTodo, theme, deleteTodo, todos, setTodos, updateTodoStorage } =
-    useContext(TodoContext);
+  const { toggleTodo, theme, deleteTodo } = useContext(TodoContext);
 
-  const handleDragStart = (e) => {
-    e.dataTransfer.setData("todoId", todo.id);
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: String(todo.id) });
+
+  const style = {
+    transition,
+    transform: CSS.Transform.toString(transform),
   };
 
-  const handleDragOver = (e) => {
-    e.preventDefault(); // Necessary to allow drop
+  const handleToggle = (e) => {
+    // Stop propagation to prevent drag handlers from capturing this event
+    e.stopPropagation();
+    console.log("Toggle clicked for todo:", todo.id);
+    toggleTodo(todo.id);
   };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-
-    const draggedId = e.dataTransfer.getData("todoId");
-    const droppedId = todo.id;
-
-    // Verify we have both IDs
-    if (!draggedId || draggedId === droppedId) {
-      return; // Exit early if same item or missing data
-    }
-
-    const draggedIndex = todos.findIndex((item) => item.id === draggedId);
-    const droppedIndex = todos.findIndex((item) => item.id === droppedId);
-
-    // Verify both items exist
-    if (draggedIndex === -1 || droppedIndex === -1) {
-      console.error("Could not find one or both items");
-      return;
-    }
-
-    setTodos((prevTodos) => {
-      const newTodos = [...prevTodos];
-      const [movedItem] = newTodos.splice(draggedIndex, 1);
-      newTodos.splice(droppedIndex, 0, movedItem);
-      updateTodoStorage(newTodos);
-      return newTodos;
-    });
-  };
-
   return (
     <div
-      key={todo.id}
-      draggable="true"
-      onDragStart={handleDragStart}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-      className={`flex justify-between space-x-4 md:space-x-24 p-4 group ${
-        theme === "light"
-          ? "border-b-dark-grayish-blue border-b-1"
-          : "border-b-gray-400 border-b-1"
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      style={style}
+      onClick={() => {
+        alert("hey");
+      }}
+      className={`flex justify-between space-x-4 md:space-x-24 p-4 group border-b-1 ${
+        theme === "light" ? "border-b-dark-grayish-blue" : "border-b-gray-400 "
       }`}
     >
-      <div
-        className="flex space-x-4 flex-1 cursor-pointer"
-        onClick={() => {
-          toggleTodo(todo.id);
-        }}
-      >
+      <div role="button" className="flex space-x-4 flex-1 cursor-pointer">
         <div
           className={`h-6 aspect-square flex justify-center items-center rounded-full ${
             todo.checked
@@ -71,6 +44,7 @@ const Todo = ({ todo }) => {
           } ${
             theme === "dark" ? "border-gray-600" : "border-light-grayish-blue"
           }`}
+          onClick={handleToggle}
         >
           <img
             src={check}

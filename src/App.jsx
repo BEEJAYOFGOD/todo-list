@@ -12,6 +12,7 @@ import AllTodos from "./allTodos";
 import CompletedTodos from "./CompletedTodos";
 import ActiveTodos from "./ActiveTodos";
 import clickSound from "./assets/click-button-166324.mp3";
+import { DndContext, closestCorners } from "@dnd-kit/core";
 
 function App() {
   let { todos, addTodo, theme, toggleTheme, setTodos, setTheme } =
@@ -160,11 +161,13 @@ function App() {
                     : `bg-white mt-4 rounded-t-md`
                 }`}
               >
-                <Routes>
-                  <Route path="/" element={<AllTodos />} />
-                  <Route path="active" element={<ActiveTodos />} />
-                  <Route path="completed" element={<CompletedTodos />} />
-                </Routes>
+               
+                  <Routes>
+                    <Route path="/" element={<AllTodos />} />
+                    <Route path="active" element={<ActiveTodos />} />
+                    <Route path="completed" element={<CompletedTodos />} />
+                  </Routes>
+                
               </div>
 
               <div
