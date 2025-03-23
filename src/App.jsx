@@ -158,7 +158,7 @@ function App() {
                   theme == "dark"
                     ? `bg-very-dark-desaturated-blue mt-4 rounded-t-md`
                     : `bg-white mt-4 rounded-t-md`
-                } shadow-2xl`}
+                }`}
               >
                 <Routes>
                   <Route path="/" element={<AllTodos />} />
@@ -169,7 +169,7 @@ function App() {
 
               <div
                 className={`text-gray-600 px-4 py-4
-                flex justify-between rounded-b-md shadow-2xl
+                flex justify-between rounded-b-md shadow-xl
                 ${isDark ? `bg-very-dark-desaturated-blue` : `bg-white`}
                 ${todos.length ? `flex` : `hidden`}
 
