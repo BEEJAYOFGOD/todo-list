@@ -26,7 +26,7 @@ const AllTodos = () => {
   const hanldeDragEnd = (event) => {
     const { active, over } = event;
 
-    if (!over || active.id === over.id) return;
+    if (active.id === over.id) return;
 
     setTodos((prev) => {
       const origPos = getTaskPos(active.id);
@@ -38,23 +38,34 @@ const AllTodos = () => {
 
   const sensors = useSensors(
     // For mouse/pointer devices
+
     useSensor(PointerSensor, {
       // Add a delay to distinguish between clicks and drags
+
       activationConstraint: {
         delay: 250,
+
         tolerance: 5,
       },
     }),
+
     // Specifically for touch devices (mobile)
+
     useSensor(TouchSensor, {
       // Lower delay for touch to feel more responsive
+
       activationConstraint: {
         delay: 200,
+
         tolerance: 8, // Higher tolerance for finger size
       },
     }),
+
     // Optional: Add keyboard support for accessibility
-    useSensor(KeyboardSensor)
+
+    useSensor(KeyboardSensor, {
+      coordinatedGetter: sortableKeyboardCoordinates,
+    })
   );
 
   return (
@@ -65,9 +76,11 @@ const AllTodos = () => {
         collisionDetection={closestCorners}
       >
         <SortableContext items={todos} strategy={verticalListSortingStrategy}>
-          {todos.map((todo) => (
-            <Todo key={todo.id} todo={todo} />
-          ))}
+          <div className="overflow-y-scroll">
+            {todos.map((todo) => (
+              <Todo key={todo.id} todo={todo} />
+            ))}
+          </div>
         </SortableContext>
       </DndContext>
     </>
