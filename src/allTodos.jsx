@@ -28,7 +28,6 @@ const AllTodos = () => {
 
     if (!over || active.id === over.id) return;
 
-
     setTodos((prev) => {
       const origPos = getTaskPos(active.id);
       const newPos = getTaskPos(over.id);
@@ -38,11 +37,24 @@ const AllTodos = () => {
   };
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinatedGetter: sortableKeyboardCoordinates,
+    // For mouse/pointer devices
+    useSensor(PointerSensor, {
+      // Add a delay to distinguish between clicks and drags
+      activationConstraint: {
+        delay: 250,
+        tolerance: 5,
+      },
     }),
-    useSensor(TouchSensor)
+    // Specifically for touch devices (mobile)
+    useSensor(TouchSensor, {
+      // Lower delay for touch to feel more responsive
+      activationConstraint: {
+        delay: 200,
+        tolerance: 8, // Higher tolerance for finger size
+      },
+    }),
+    // Optional: Add keyboard support for accessibility
+    useSensor(KeyboardSensor)
   );
 
   return (

@@ -18,20 +18,19 @@ const Todo = ({ todo }) => {
 
   const handleToggle = (e) => {
     // Stop propagation to prevent drag handlers from capturing this event
+    e.preventDefault();
     e.stopPropagation();
     console.log("Toggle clicked for todo:", todo.id);
     toggleTodo(todo.id);
   };
   return (
     <div
+      onClick={handleToggle}
       ref={setNodeRef}
       {...attributes}
       {...listeners}
       style={style}
-      onClick={() => {
-        alert("hey");
-      }}
-      className={`flex justify-between space-x-4 md:space-x-24 p-4 group border-b-1 ${
+      className={`flex justify-between space-x-4 md:space-x-24 p-4 group border-b-1 touch-none select-none ${
         theme === "light" ? "border-b-dark-grayish-blue" : "border-b-gray-400 "
       }`}
     >
@@ -44,7 +43,6 @@ const Todo = ({ todo }) => {
           } ${
             theme === "dark" ? "border-gray-600" : "border-light-grayish-blue"
           }`}
-          onClick={handleToggle}
         >
           <img
             src={check}
