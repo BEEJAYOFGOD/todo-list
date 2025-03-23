@@ -154,7 +154,7 @@ function App() {
               </form>
 
               <div
-                className={`transition-all duration-[0.1s] ease-in ${
+                className={`transition-all duration-[0.1s] ease-in shadow-lg ${
                   theme == "dark"
                     ? `bg-very-dark-desaturated-blue mt-4 rounded-t-md`
                     : `bg-white mt-4 rounded-t-md`
@@ -169,7 +169,7 @@ function App() {
 
               <div
                 className={`text-gray-600 px-4 py-4
-                flex justify-between rounded-b-md shadow-xl
+                flex justify-between rounded-b-md shadow-lg
                 ${isDark ? `bg-very-dark-desaturated-blue` : `bg-white`}
                 ${todos.length ? `flex` : `hidden`}
 
