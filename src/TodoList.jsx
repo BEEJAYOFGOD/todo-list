@@ -1,31 +1,7 @@
-import { useContext, useState } from "react";
-import { TodoContext } from "TodoContext";
+import Todo from "./todo";
 
-const TodoList = () => {
-  const { todos, addToTodo, handleDelete } = useContext(TodoContext);
-  const [input, setInput] = useState("");
-
-  return (
-    <div>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button onClick={() => addToTodo({ text: input, checked: false })}>
-        Add Todo
-      </button>
-
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            {todo.text}
-            <button onClick={() => handleDelete(todo.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+const TodoList = ({ todos }) => {
+  return todos.map((todo) => <Todo key={todo.id} todo={todo} />);
 };
 
 export default TodoList;
