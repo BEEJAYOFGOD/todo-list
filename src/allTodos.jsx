@@ -76,7 +76,7 @@ const AllTodos = () => {
         collisionDetection={closestCorners}
       >
         <SortableContext items={todos} strategy={verticalListSortingStrategy}>
-          <div className="overflow-y-scroll">
+          <div>
             {todos.map((todo) => (
               <Todo key={todo.id} todo={todo} />
             ))}
