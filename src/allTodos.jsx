@@ -13,7 +13,11 @@ const AllTodos = () => {
 
   if (todos.length === 0) {
     return (
-      <div className="h-24 flex justify-center items-center">
+      <div
+        className={`h-24 flex justify-center items-center text-dark-grayish-blue ${
+          !todos.length ? "rounded-lg " : ""
+        }`}
+      >
         <p>No todos available</p>
       </div>
     );

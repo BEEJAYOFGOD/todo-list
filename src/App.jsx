@@ -154,10 +154,18 @@ function App() {
               </form>
 
               <div
-                className={`transition-all duration-[0.1s] ease-in shadow-[0_8px_8px_rgba(0,0,0,0.2)] ${
+                className={`transition-all duration-[0.1s] ease-in shadow-[0_8px_8px_rgba(0,0,0,0.2)] rounded-md  ${
                   theme == "dark"
-                    ? `bg-very-dark-desaturated-blue mt-4 rounded-t-md`
-                    : `bg-white mt-4 rounded-t-md`
+                    ? `bg-very-dark-desaturated-blue mt-4 `
+                    : `bg-white mt-4 `
+                }${
+                  (location.pathname === "/completed" &&
+                    todos.some((todo) => todo.checked)) ||
+                  (location.pathname === "/active" &&
+                    todos.some((todo) => !todo.checked)) ||
+                  (location.pathname === "/" && todos.some((todo) => todo))
+                    ? "rounded-b-none"
+                    : ""
                 }`}
               >
                 <Routes>
@@ -177,14 +185,7 @@ function App() {
               }
                   ${todos.length ? `flex` : `hidden`}
 
-                 ${
-                   (!todos.filter((todo) => !todo.checked).length &&
-                     location.pathname === "/active") ||
-                   (!todos.filter((todo) => todo.checked).length &&
-                     location.pathname === "/completed")
-                     ? "rounded-t-md"
-                     : ""
-                 }
+                
               `}
               >
                 <p>
