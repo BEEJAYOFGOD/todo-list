@@ -10,6 +10,14 @@ const ActiveTodos = () => {
   const filteredTodos = todos.filter((todo) => !todo.checked);
   const memoizedfilteredTodos = useMemoList({ todos: filteredTodos });
 
+  if (filteredTodos.length === 0) {
+    return (
+      <div className="h-24 flex justify-center items-center text-dark-grayish-blue border-b border-dark-grayish-blue">
+        <p>No active todos available</p>
+      </div>
+    );
+  }
+
   return <Dnd>{memoizedfilteredTodos}</Dnd>;
 };
 

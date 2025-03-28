@@ -224,6 +224,7 @@ function App() {
                   </Link>
                 </div>
                 <button
+                  className="cursor-pointer"
                   onClick={() => {
                     handleClearCompleted();
                   }}
@@ -233,7 +234,9 @@ function App() {
               </div>
 
               <div
-                className={`flex md:hidden justify-center gap-2 rounded-md mt-12 px-4 py-4 ${
+                className={`${
+                  todos.length ? "flex border" : "hidden"
+                } md:hidden justify-center gap-2 rounded-md mt-12 px-4 py-4 ${
                   isDark ? "bg-gray-800 text-white" : "bg-white text-black"
                 }`}
               >
@@ -268,6 +271,10 @@ function App() {
                   Completed
                 </Link>
               </div>
+
+              <p className="text-center text-dark-grayish-blue mt-12">
+                Drag and drop to reorder list
+              </p>
             </div>
           </div>
         </div>

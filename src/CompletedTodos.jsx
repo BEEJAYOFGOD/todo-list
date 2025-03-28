@@ -11,6 +11,14 @@ const CompletedTodos = () => {
 
   const memoizedfilteredTodos = useMemoList({ todos: filteredTodos });
 
+  if (filteredTodos.length === 0) {
+    return (
+      <div className="h-24 flex justify-center items-center text-dark-grayish-blue border-b border-dark-grayish-blue">
+        <p>No completed todos available</p>
+      </div>
+    );
+  }
+
   return <Dnd>{memoizedfilteredTodos}</Dnd>;
 };
 

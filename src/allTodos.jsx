@@ -11,9 +11,9 @@ const AllTodos = () => {
 
   const memoizedTodoList = useMemoList({ todos });
 
-  if (!todos || todos.length === 0) {
+  if (todos.length === 0) {
     return (
-      <div className="">
+      <div className="h-24 flex justify-center items-center">
         <p>No todos available</p>
       </div>
     );
