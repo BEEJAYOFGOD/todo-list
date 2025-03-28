@@ -236,7 +236,7 @@ function App() {
 
               <div
                 className={`${
-                  todos.length ? "flex border" : "hidden"
+                  todos.length ? "flex " : "hidden"
                 } md:hidden justify-center gap-2 rounded-md mt-12 px-4 py-4 ${
                   isDark ? "bg-gray-800 text-white" : "bg-white text-black"
                 }`}
